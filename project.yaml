@@ -1,5 +1,5 @@
 specVersion: 0.0.1
-description: ''
+description: "A subquery project for finding moonbeam contributors who haven't set their rewards address"
 repository: git@github.com:talismansociety/moonbeam-contributors.git
 schema: ./schema.graphql
 network:
@@ -8,15 +8,17 @@ network:
 dataSources:
   - name: main
     kind: substrate/Runtime
-    startBlock: 1
+    # startBlock: 7538550 # before the moonbeam crowdloan went live
+    startBlock: 7600000 # before the first talisman moonbeam crowdloan contribution
     mapping:
       handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
-        - handler: handleEvent
+        - handler: handleContributed
           kind: substrate/EventHandler
           filter:
-            module: balances
-            method: Deposit
-        - handler: handleCall
-          kind: substrate/CallHandler
+            module: crowdloan
+            method: Contributed
+        - handler: handleMemoUpdated
+          kind: substrate/EventHandler
+          filter:
+            module: crowdloan
+            method: MemoUpdated

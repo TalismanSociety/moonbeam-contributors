@@ -8,8 +8,8 @@ network:
 dataSources:
   - name: main
     kind: substrate/Runtime
-    # startBlock: 7538550 # before the moonbeam crowdloan went live
-    startBlock: 7600000 # before the first talisman moonbeam crowdloan contribution
+    startBlock: 7538550 # before the moonbeam crowdloan went live
+    # startBlock: 7600000 # before the first talisman moonbeam crowdloan contribution
     mapping:
       handlers:
         - handler: handleContributed
